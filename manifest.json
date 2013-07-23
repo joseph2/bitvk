@@ -1,0 +1,29 @@
+{
+    "manifest_version": 2,
+    "name": "Vokal",
+    "version": "0.13",
+//    "background": { "scripts": ["popup.js"] },
+    "description": "Love music everywhere",
+    "browser_action": {
+        "default_icon": "ico/24.png"
+    },
+    "icons": {
+        "128": "ico/128.png",
+        "24": "ico/24.png"
+    },
+    "permissions": ["tabs", "*://*.vk.me/*", "*://vk.com/*", "background", "downloads"],
+    "content_scripts": [
+        {
+            "js": [ "vendor/zepto.js", "content.js" ],
+            "css": ["style.css"],
+            "matches": [ "https://vk.com/*" ]
+        }
+    ],
+
+    "background": {
+        "scripts": ["popup.js"]
+    }
+
+
+
+}
