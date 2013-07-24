@@ -1,8 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Vokal",
-    "version": "0.13",
-//    "background": { "scripts": ["popup.js"] },
+    "version": "0.2",
     "description": "Love music everywhere",
     "browser_action": {
         "default_icon": "ico/24.png"
@@ -22,8 +21,7 @@
 
     "background": {
         "scripts": ["popup.js"]
-    }
+    },
 
-
-
+    "options_page": "options.html"
 }

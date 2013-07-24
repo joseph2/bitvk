@@ -1,32 +1,34 @@
 // Copyright (c) 2011 The Chromium Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
-
-//Called when the user clicks on the browser action.
-
-
-//chrome.browserAction.onClicked.addListener(function(tab) {
-//    chrome.tabs.executeScript(
-//        null, {code:"document.body.style.background='red !important'"});
-//});
-
-
+chrome.browserAction.setBadgeBackgroundColor({color:[0, 93, 255, 100]});
+chrome.browserAction.setBadgeText({text:String(0)});
+chrome.browserAction.setTitle({title: "Да пребудет с нами Сила!"})
 
 chrome.extension.onMessage.addListener(
     function(request, sender, send_response) {
-        if (request.cmd == "audio_download") {
+        if (request.cmd == "vokal_download_audio") {
+            var track =  request.track
+            var file_name = track.artist + " - " + track.title + '.mp3';
 
-            options = {url:request.url}
-            chrome.downloads.download(options)
-            chrome.browserAction.setBadgeText({text:String(13)});
+            var options = {url: track.url, filename: file_name}
+
+
+
+
+           chrome.downloads.download(options, function(downloadId){
+               chrome.browserAction.getBadgeText({}, function(currentText) {
+                   var number = parseInt(currentText)
+                   chrome.browserAction.setBadgeText({text:String(number+1)});
+               });
+           })
+
         }
 
     }
 )
 
 
-chrome.browserAction.setBadgeBackgroundColor({color:[0, 93, 255, 100]});
-chrome.browserAction.setBadgeText({text:String(1)});
 //window.setInterval(function() {
 //    console.log("selection item:" + i);
 //    chrome.browserAction.setBadgeText({text:String(i)});

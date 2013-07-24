@@ -2,5 +2,20 @@
     width:            16px;
     height:           16px;
     background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAmElEQVQ4jc3SsQkCQRCF4Q890MjsWtDEBjS1Ay3CwNhmTE0OwQ7MBLUXaxBM5uA43L1LRB8MvB3e/APDDuU1R4lnKjDoAEwxywW6AJ36PaBo+DNe4S84tLJbrMIPsWnDjh8WrKOS2a/dYIdR4z2KXm/AHRXGUVX0smrfYIlr1CKVLaR1wz78IxXKAbKDtf7rJ5Y49Zyb1OYNhFYSMgcy37wAAAAASUVORK5CYII=');
+    position: relative;
+    cursor: pointer;
+    top: -3px;
+    left: -3px;
+    visibility: hidden;
+    overflow: hidden;
+}
 
+
+.vokal_audio_download {
+
+
+}
+.over .vokal_download_btn {
+    visibility: visible;
+    overflow: hidden;
 }
