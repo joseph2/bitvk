@@ -1,25 +1,27 @@
-var audios = [];
+var vokal = {
+    index: 0,
+    tracks: []
+};
 
-var example_track = {
-    "url": '',
-    "artist": '',
-    "title": ''
-}
+function clientListener() {
+    $(document).on('mouseover', 'div.audio', function (e) {
 
-function parsePlaylist() {
-
-    var nodes = $('.audio');
-    if (nodes.length > 0) {
-        for (var i = 0; i < nodes.length; i++) {
-            var track = parseAudioNode(nodes[i]);
-            if (track == null) return;
-            track.id = i;
-            injectDownloadLink(nodes[i], track);
-            audios[i] = track
+        e.preventDefault();
+        var el = $(e.target)
+        while (!el.hasClass('audio')) {
+            el = el.parent();
         }
-    }
-    console.log(audios)
+        if (!el.attr('vokal_id')) {
+            var track = parseAudioNode(el)
+            if (track === undefined) return;
 
+            track.id = vokal.index++;
+            vokal.tracks[track.id] = track
+            injectDownloadLink(el, track);
+            el.attr('vokal_id', track.id)
+        }
+
+    });
 }
 
 function parseAudioNode(node) {
@@ -45,17 +47,14 @@ function injectDownloadLink(node, track) {
 
 
 function initialize() {
-    parsePlaylist();
+    clientListener();
 
-//    $('#page_wrap').on('mouseup', initAudioNodesCount)
-    $('.vokal_el').on('click', function (e) {
-
+    $(document).on('click', '.vokal_el', function (e) {
         var track_id = $(e.target).attr('vokal_track_id')
         if (track_id == undefined) return;
-        var track = audios[parseInt(track_id)]
+        var track = vokal.tracks[parseInt(track_id)]
 
         chrome.extension.sendMessage({cmd: "vokal_download_audio", track: track});
-
         return false;
     })
 };
