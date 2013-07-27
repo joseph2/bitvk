@@ -19,3 +19,7 @@
     visibility: visible;
     overflow: hidden;
 }
+
+.vokal_downloaded {
+    border-bottom: 1px dotted #aaaaaa;
+}
