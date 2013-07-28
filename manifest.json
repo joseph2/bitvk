@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Vokal",
-    "version": "0.3.1",
+    "version": "0.3.4",
     "description": "vkontakte advanced music",
     "browser_action": {
         "default_icon": "ico/24.png"
@@ -10,7 +10,7 @@
         "128": "ico/128.png",
         "24": "ico/24.png"
     },
-    "permissions": ["*://*.vk.me/*", "*://vk.com/*", "background", "downloads", "storage"],
+    "permissions": ["*://*.vk.me/*", "*://vk.com/*", "background", "storage"],
     "content_scripts": [
         {
             "js": [ "vendor/zepto.js", "content.js" ],

@@ -1,110 +1,128 @@
-var vokal = {
-    index: 0,
-    tracks: [],
+function throw_event(name, data) {
+    var event = document.createEvent("Event");
+    event.initEvent(name, true, true);
+    document.dispatchEvent(event);
+    console.log('Dispatch event: ' + name);
+}
 
-    getTrack: function (index) {
+function TrackList(storage) {
+    this.key = 'tracks';
+    this.storage = storage;
+    this.tracks = [];
+    this.index = 0;
+
+    var loader = (function (track_list) {
+        return function (fetched_data) {
+
+            if (Object.getOwnPropertyNames(fetched_data).length > 0) {
+                track_list.tracks = fetched_data.tracks;
+            }
+
+            console.log('load tracks:' + track_list.tracks.length);
+            throw_event('load_data');
+        }
+    })(this);
+
+    storage.get(this.key, loader);
+
+    this.download = function (track) {
+        track.file = track.artist + " - " + track.title + '.mp3'
+        var a = document.createElement('a');
+        a.href = track.url;
+        a.download = track.file;
+        a.click();
+
+        track.downloaded = true
+        this.tracks[track.id] = track
+
+        var items = this.tracks
+        this.storage.set({'tracks': items});
+        chrome.extension.sendMessage({cmd: "vokal_download_audio", track: track});
+    }
+
+    this.get = function (index) {
         return this.tracks[index];
-    },
+    }
 
-    addTrack: function (track) {
+    this.add = function (track) {
         track.id = this.index++;
         track.downloaded = false;
         this.tracks[track.id] = track
 
         return track;
-    },
+    }
 
-    findTrackByUrl: function (url) {
-        $.each(this.tracks, function (index, track) {
-            if (track.url == url) {
-                return track;
+    this.findByUrl = function (url) {
+
+        for (var i = 0; i < this.tracks.length; i++) {
+            if (this.tracks[i].url == url) {
+                return this.tracks[i];
             }
-        })
+        }
 
         return undefined;
-    },
-    markDownloadedTrack: function (track) {
-        track.downloaded = true;
-        this.tracks[track.id] = track;
     }
-};
-
-function loadData() {
-    chrome.storage.local.get("tracks", function (fetchedData) {
-        $.each(fetchedData.tracks, function (index, item) {
-            vokal.addTrack(item)
-        })
-    });
 }
 
-function clientMoveListener() {
-    $(document).on('mouseover', 'div.audio', function (e) {
 
-        e.preventDefault();
-        var el = $(e.target)
-        while (!el.hasClass('audio')) {
-            el = el.parent();
-        }
-        if (!el.attr('vokal_id')) {
-            var track = parseAudioNode(el)
-            if (track === undefined) return;
+function markDownloaded(btn) {
+    var el = $(btn)
+    while (!el.hasClass('info')) {
+        el = el.parent();
+    }
 
-            var vokal_track = vokal.findTrackByUrl(track.url)
-            if (vokal_track === undefined) {
-                vokal.addTrack(track)
+    $('.duration', el).addClass('vokal_downloaded');
+}
+
+function onDownloadClick(target) {
+
+    var track_id = $(target).attr('vokal_track_id')
+    if (track_id == undefined) return;
+    var track = trackList.get(parseInt(track_id))
+
+    if (!track.downloaded) {
+        trackList.download(track);
+        markDownloaded(target)
+    }
+}
+
+audio_list_parser = function () {
+    $('.audio').each(function () {
+
+        var node = $(this)
+        if (!node.attr('vokal_id')) {
+            var raw_track = parseAudioNode(node);
+            if (raw_track === undefined) return;
+
+            var track = trackList.findByUrl(raw_track.url)
+            if (track === undefined) {
+                console.log('new track:' + raw_track.url);
+                track = trackList.add(raw_track)
             }
 
+            injectDownloadLink(node, track);
+            node.attr('vokal_id', track.id)
 
-            injectDownloadLink(el, track);
-            el.attr('vokal_id', track.id)
+            ;
+            if (track.downloaded) {
+                $('.duration', node).addClass('vokal_downloaded');
+            }
+
         }
+    })
+};
 
-    });
+function clientTimerListener() {
+    audio_list_parser();
+    setInterval(audio_list_parser, 1000)
 }
 
-function clientClickListener () {
+function clientClickListener() {
     window.document.addEventListener('click', function (event) {
         if (event.target.className == 'vokal_download_btn') {
             onDownloadClick(event.target)
         }
     }, true);
-}
-
-function onDownloadClick(target) {
-    console.log(target);
-
-    var track_id = $(target).attr('vokal_track_id')
-    if (track_id == undefined) return;
-    var track = vokal.getTrack(parseInt(track_id))
-    if (!track.downloaded) {
-        chrome.extension.sendMessage({cmd: "vokal_download_audio", track: track});
-        vokal.markDownloadedTrack(track)
-        var el = $(target)
-        while (!el.hasClass('info')) {
-            el = el.parent();
-        }
-        $('.duration', el).addClass('vokal_downloaded');
-    }
-}
-
-function clientTimerListener() {
-    setInterval(function () {
-        $('.audio').each(function () {
-
-            var node = $(this)
-            if (!node.attr('vokal_id')) {
-                var track = parseAudioNode(node);
-                if (track === undefined) return;
-                var vokal_track = vokal.findTrackByUrl(track.url)
-                if (vokal_track === undefined) {
-                    vokal.addTrack(track)
-                }
-
-                injectDownloadLink(node, track);
-                node.attr('vokal_id', track.id)
-            }
-        })
-    }, 1000)
 }
 
 function parseAudioNode(node) {
@@ -134,17 +152,12 @@ function injectDownloadLink(node, track) {
 };
 
 
-
-
-function initialize() {
-//    clientMoveListener();
-//    loadData();
-    clientTimerListener();
-    clientClickListener();
-};
-
-
 Zepto(function ($) {
-    initialize();
-})
+    trackList = new TrackList(chrome.storage.local);
 
+    $(document).on('load_data', function () {
+        clientTimerListener();
+        clientClickListener();
+    })
+
+})
