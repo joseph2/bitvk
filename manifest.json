@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "Vokal",
     "version": "0.3",
-    "description": "Love music everywhere",
+    "description": "vkontakte music downloader",
     "browser_action": {
         "default_icon": "ico/24.png"
     },
