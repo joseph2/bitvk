@@ -1,25 +1,39 @@
 <!doctype html>
 <html>
-  <head>
-    <title>Getting Started Extension's Popup</title>
+<head>
+    <meta charset="utf-8">
     <style>
-      body {
-        min-width:357px;
-        overflow-x:hidden;
-      }
+        body {
+            min-width: 350px;
+            overflow-x: hidden;
+            font-size: 8pt;
+            padding: 0;
+            margin: 0;
+            background-color: #fffff5;
+            color: #373e45;
+        }
 
-      img {
-        margin:5px;
-        border:2px solid rgba(0, 93, 255, 0.68);
-        vertical-align:middle;
-        width:75px;
-        height:75px;
-      }
+        ul {
+            padding: 2px;
+            margin: 5px 20px;
+            list-style-type: decimal;
+        }
+
+        img {
+            margin: 5px;
+            border: 2px solid rgba(0, 93, 255, 0.68);
+            vertical-align: middle;
+            width: 75px;
+            height: 75px;
+        }
     </style>
 
     <!-- JavaScript and HTML must be in separate files for security. -->
+    <script src="vendor/zepto.js"></script>
     <script src="popup.js"></script>
-  </head>
-  <body>
-  </body>
+</head>
+<body>
+
+<ul id="track_list"></ul>
+</body>
 </html>

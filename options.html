@@ -1,9 +1,74 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <meta charset="utf-8">
+    <title>Vokal oprions</title>
+    <link href='vendor/bootstrap.css' rel='stylesheet' type='text/css'>
+    <script src="vendor/jquery.js"></script>
+    <script src="vendor/bootstrap.js"></script>
+    <script src="options.js"></script>
+
+
+    <style>
+        body {
+            background-color: #5f6b78;
+            color: #373e45;
+        }
+
+        .main {
+            margin-top: 100px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+
+        }
+
+        .tab-pane {
+            border-left: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            border-right: 1px solid #ddd;
+            padding: 10px 5px 5px 10px;
+            position: relative;
+            top: -1px;
+        }
+    </style>
 </head>
 <body>
-<h3>May the Force be with you!</h3>
+<a href="https://github.com/AlmazKo/vokal"><img style="position: absolute; top: 0; right: 0; border: 0;"
+                                                src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"
+                                                alt="Fork me on GitHub"></a>
+
+<div class="container">
+
+    <div class="main panel">
+        <h1>Vokal</h1>
+
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#description" data-toggle="tab">Описание</a></li>
+            <li ><a href="#setting" data-toggle="tab">Настройки</a></li>
+            <li><a href="#stat" data-toggle="tab">Статистика</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="description" class="tab-pane fade active in">
+                <p>
+                    Vokal - это расширение для браузера, позволяющее скачивать треки из <i>vkontakte.ru</i>.
+                </p>
+
+                <p>
+                    Vokal является приложением с открытым исходным кодом и прозрачным функционалом
+                </p>
+            </div>
+
+            <div id="setting" class="tab-pane fade">
+                <button id="action__reset_cache" type="button" class="btn btn-default btn-small">Сбросить кэш</button>
+                <i id="vokal_cache_size">0</i> bytes
+            </div>
+
+            <div id="stat" class="tab-pane fade"></div>
+
+        </div>
+        <div class="panel-footer text-muted">Версия <i id="vokal_version"></i></div>
+    </div>
+
+</div>
 </body>
 </html>
