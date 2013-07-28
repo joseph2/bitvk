@@ -28,10 +28,27 @@ function TrackList(storage) {
 
 track_list = new TrackList(chrome.storage.local);
 
+Zepto(function ($) {});
 
-Zepto(function ($) {
-})
+function download_complete(downloadId) {
+    chrome.browserAction.getBadgeText({}, function (currentText) {
+        var number = parseInt(currentText)
+        chrome.browserAction.setBadgeText({text: String(number + 1)});
+    });
+}
 
+function download(url, file_name) {
+    if (chrome.downloads) {
+        var options = {url: url, filename: file_name}
+        chrome.downloads.download(options, download_complete)
+    } else {
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = file_name;
+        a.click();
+        download_complete();
+    }
+}
 
 var cmd_listener = (function (track_list) {
 
@@ -39,18 +56,8 @@ var cmd_listener = (function (track_list) {
         if (request.cmd == "vokal_download_audio") {
             var track = request.track
             var file_name = track.artist + " - " + track.title + '.mp3';
-
-            var options = {url: track.url, filename: file_name}
-
+            download(track.url, file_name); // todo add try..catch
             track_list.add(track, file_name)
-
-            chrome.downloads.download(options, function (downloadId) {
-                chrome.browserAction.getBadgeText({}, function (currentText) {
-                    var number = parseInt(currentText)
-                    chrome.browserAction.setBadgeText({text: String(number + 1)});
-                });
-            })
-
         }
 
     };
