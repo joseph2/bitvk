@@ -52,6 +52,20 @@ function TrackList(storage) {
         return track;
     }
 
+    this.update = function (new_track) {
+        var track = !this.tracks[new_track.id];
+        if (!track) return;
+
+        track.duration = new_track.duration
+        track.bytes = new_track.bytes
+        track.bit_rate = new_track.bit_rate
+
+        this.tracks[track.id] = track
+
+
+        return track;
+    }
+
     this.findByUrl = function (url) {
 
         for (var i = 0; i < this.tracks.length; i++) {
@@ -100,13 +114,22 @@ audio_list_parser = function () {
                 track = trackList.add(raw_track)
             }
 
-            injectDownloadLink(node, track);
-            node.attr('vokal_id', track.id)
+            $.ajax({
+                type: 'HEAD',
+                url: raw_track.url,
+                timeout: 1000,
+                success: function (data, textStatus, request) {
+                    track.bytes = parseInt(request.getResponseHeader('Content-Length'));
+                    var seconds = stringTimeToSeconds(track.duration);
+                    var kbit = track.bytes / 128;
+                    track.bit_rate = Math.ceil(Math.round(kbit / seconds) / 16) * 16;
 
-            ;
-            if (track.downloaded) {
-                $('.duration', node).addClass('vokal_downloaded');
-            }
+                    injectDownloadLink(node, track);
+                },
+                error: function (xhr, type) {
+                    console.log(xhr, type)
+                }
+            })
 
         }
     })
@@ -125,6 +148,16 @@ function clientClickListener() {
     }, true);
 }
 
+function stringTimeToSeconds(string) {
+    var result = 0;
+    var arr = string.split(':').reverse();
+    for (var i = 0; i < arr.length; i++) {
+        result += parseInt(arr[i]) * Math.pow(60, i);
+    }
+
+    return result;
+}
+
 function parseAudioNode(node) {
     var value = $('input[type=hidden]', node).val();
 
@@ -137,6 +170,7 @@ function parseAudioNode(node) {
     track.url = hrefArr[0];
     track.artist = $.trim($('.title_wrap b', node).text());
     track.title = $.trim($('.title_wrap .title', node).text());
+    track.duration = $('.duration', node).text();
 
     return track;
 };
@@ -148,7 +182,15 @@ function injectDownloadLink(node, track) {
         'onclick="return cancelEvent(event);">' +
         '<div vokal_track_id="' + track.id + '" class="vokal_download_btn"></div></div>';
 
-    $('.actions', node).prepend(download_link)
+    $('.actions', node).prepend(download_link);
+
+
+    node.attr('vokal_id', track.id)
+
+
+    if (track.downloaded) {
+        $('.duration', node).addClass('vokal_downloaded');
+    }
 };
 
 
