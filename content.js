@@ -81,11 +81,11 @@ function TrackList(storage) {
 
 function markDownloaded(btn) {
     var el = $(btn)
-    while (!el.hasClass('info')) {
+    while (!el.hasClass('area')) {
         el = el.parent();
     }
 
-    $('.duration', el).addClass('vokal_downloaded');
+    el.addClass('vokal_downloaded');
 }
 
 function onDownloadClick(target) {
@@ -187,9 +187,10 @@ function injectDownloadLink(node, track) {
 
     node.attr('vokal_id', track.id)
 
+    $('.duration', node).after('<div class="fl_r vokal_bitrate">' + track.bit_rate + ' kb/s</div>');
 
     if (track.downloaded) {
-        $('.duration', node).addClass('vokal_downloaded');
+        markDownloaded($('.area', node));
     }
 };
 

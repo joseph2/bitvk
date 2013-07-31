@@ -29,12 +29,19 @@
             position: relative;
             top: -1px;
         }
+
+        .fork_me {
+            position: absolute;
+            top: 0;
+            right: 0;
+            border: 0;
+        }
     </style>
 </head>
 <body>
-<a href="https://github.com/AlmazKo/vokal"><img style="position: absolute; top: 0; right: 0; border: 0;"
-                                                src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"
-                                                alt="Fork me on GitHub"></a>
+<a href="https://github.com/AlmazKo/vokal">
+    <img class="fork_me" src="img/forkme_right_red_aa0000.png" alt="Fork me on GitHub">
+</a>
 
 <div class="container">
 
@@ -43,7 +50,7 @@
 
         <ul class="nav nav-tabs">
             <li class="active"><a href="#description" data-toggle="tab">Описание</a></li>
-            <li ><a href="#setting" data-toggle="tab">Настройки</a></li>
+            <li><a href="#setting" data-toggle="tab">Настройки</a></li>
             <li><a href="#stat" data-toggle="tab">Статистика</a></li>
         </ul>
 
@@ -64,7 +71,7 @@
             </div>
 
             <div id="stat" class="tab-pane fade">
-                <table id="table_stat" class="table  table-hover" />
+                <table id="table_stat" class="table table-hover"></table>
             </div>
 
         </div>
