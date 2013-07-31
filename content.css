@@ -20,12 +20,16 @@
 }
 
 .vokal_downloaded {
-    background: no-repeat right 47% url('data:image/gif;base64,R0lGODlhBAAFAIAAAAAAAAAAACH5BAHoAwEALAAAAAAEAAUAAAIHRGJgd5tWAAA7');
+    background: no-repeat right 47% url('data:image/gif;base64,R0lGODlhBgAFAIABAAAAAP///yH5BAEKAAEALAAAAAAGAAUAAAIIRGIHea2vWAEAOw==');
 }
 
 .over .vokal_bitrate {
 
     visibility: hidden;
+}
+
+.current .vokal_bitrate{
+    color: #b1bfcf;
 }
 
 .vokal_bitrate {
@@ -41,6 +45,17 @@
 .audio div.info .title_wrap {
     width: 300px !important;
 }
+#ac .vokal_el {
+    padding: 4px;
+}
+#ac .vokal_download_btn {
+    visibility:visible;
+}
+
+#ac .info {
+    width: 410px !important;
+}
+
 
 /* td.info  -- styles for friend updates*/
 td.info .vokal_bitrate {

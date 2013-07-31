@@ -145,6 +145,17 @@ function clientClickListener() {
         if (event.target.className == 'vokal_download_btn') {
             onDownloadClick(event.target)
         }
+
+        if (event.target.id == 'ac_play') {
+            setTimeout(function () {
+                var download_link = '<div id="vokal_ac_btn" current_track="" class="vokal_el fl_r" ' +
+                    'onmouseover="Audio.rowActive(this, \'Скачать аудиозапись\', [9, 5, 0]);" ' +
+                    'onclick="this.setAttribute(\'current_track\', JSON.stringify(window.audioPlayer.lastSong));' +
+                    ' return cancelEvent(event);">' +
+                    '<div class="vokal_download_btn"></div></div>';
+                $('#ac_status').after(download_link);
+            }, 200);
+        }
     }, true);
 }
 
