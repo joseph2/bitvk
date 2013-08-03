@@ -100,6 +100,20 @@ function onDownloadClick(target) {
     }
 }
 
+//{"0":"XXXXXXX","1":"217260901","2":"https://psv4.vk.me/c1062/u939351/audios/35e614163a0f.mp3","3":"201","4":"3:21","5":"Trobar De Morte","6":"The Harp of Dagda","7":"23180514","8":"0","9":"0","10":"","11":"0","12":"1","_order":1,"_prev":"XXXXXXX_218332870","_next":"XXXXXXX_214922351","aid":"XXXXXXX_217260901"}
+function onPlayerDownloadClick(vk_data) {
+    var raw_track = {}
+    raw_track.url = vk_data["2"]
+    raw_track.artist = vk_data["5"]
+    raw_track.title = vk_data["6"]
+    raw_track.duration = vk_data["4"]
+
+
+    var track = trackList.add(raw_track)
+    trackList.download(track)
+    return raw_track;
+}
+
 audio_list_parser = function () {
     $('.audio').each(function () {
 
@@ -146,13 +160,17 @@ function clientClickListener() {
             onDownloadClick(event.target)
         }
 
-        if (event.target.id == 'ac_play') {
+        if (event.target.className == 'vokal_ac_download_btn') {
+            onPlayerDownloadClick(JSON.parse((event.target.getAttribute('current_track'))))
+        }
+
+        if (event.target.id == 'ac_play' && !$('#vokal_ac_btn').length) {
             setTimeout(function () {
-                var download_link = '<div id="vokal_ac_btn" current_track="" class="vokal_el fl_r" ' +
+                var download_link = '<div id="vokal_ac_btn" class="vokal_el ctrl_wrap clear_fix fl_l" ' +
                     'onmouseover="Audio.rowActive(this, \'Скачать аудиозапись\', [9, 5, 0]);" ' +
-                    'onclick="this.setAttribute(\'current_track\', JSON.stringify(window.audioPlayer.lastSong));' +
-                    ' return cancelEvent(event);">' +
-                    '<div class="vokal_download_btn"></div></div>';
+                    'onclick="return cancelEvent(event);">' +
+                    '<div class="vokal_ac_download_btn" current_track="" ' +
+                    'onmouseover="this.setAttribute(\'current_track\', JSON.stringify(window.audioPlayer.lastSong));" ></div></div>';
                 $('#ac_status').after(download_link);
             }, 200);
         }
