@@ -166,7 +166,9 @@ window.parser = {
     parseAudioList: function () {
         $('.audio').each(function () {
 
-            var node = $(this)
+            var node = $(this);
+            if (node.hasClass('claimed')) return;
+
             if (!node.attr('vokal_id')) {
                 var unsaved_track = parser.parseAudioNode(node);
                 if (!unsaved_track) return;
