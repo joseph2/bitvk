@@ -73,11 +73,17 @@
             </div>
 
             <div id="setting" class="tab-pane fade">
+                <dl class="dl-horizontal">
+                    <dt>Размер кэша</dt><dd><span id="vokal_cache_size">~</span> байт</dd>
+                </dl>
                 <button id="action__reset_cache" type="button" class="btn btn-default btn-small">Сбросить кэш</button>
-                <i id="vokal_cache_size">0</i> bytes
             </div>
 
             <div id="stat" class="tab-pane fade">
+                <dl class="dl-horizontal">
+                    <dt>Всего в базе</dt><dd><span id="vokal_total_tracks">~</span> песен</dd>
+                    <dt>Скачено</dt><dd><span id="vokal_total_download_tracks">~</span> песен</dd>
+                </dl>
                 <table id="table_stat" class="table table-hover"></table>
             </div>
 
