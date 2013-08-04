@@ -43,6 +43,41 @@
             text-shadow: 0px 1px 1px white, 1px 1px 4px #333;
             font-family: serif;
         }
+
+        #table_stat {
+            min-height: 80px;
+        }
+        #table_stat td {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .stat_artist {
+            max-width: 250px;
+        }
+        .stat_title {
+            max-width: 300px;
+        }
+        .stat_file {
+            max-width: 250px;
+        }
+
+        .loading {
+            background: no-repeat url('img/ajax-loader.gif') 50% 50%;
+        }
+
+        .row_no_data {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        /* bootstrap */
+        .tooltip-inner {
+            max-width: 600px !important;
+            font-size: 14px;
+        }
+
     </style>
 </head>
 <body>
@@ -76,7 +111,7 @@
                 <dl class="dl-horizontal">
                     <dt>Размер кэша</dt><dd><span id="vokal_cache_size">~</span> байт</dd>
                 </dl>
-                <button id="action__reset_cache" type="button" class="btn btn-default btn-small">Сбросить кэш</button>
+                <button id="action__reset_cache" type="button" class="btn btn-default btn-small">Почистить кэш</button>
             </div>
 
             <div id="stat" class="tab-pane fade">

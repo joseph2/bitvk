@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <style>
         body {
-            min-width: 450px;
+            min-width: 350px;
             overflow-x: hidden;
             font-size: 8pt;
             font-family: sans-serif;
@@ -16,8 +16,9 @@
 
         ul {
             padding: 0px 15px;
-            margin: 10px 20px;
+            margin: 10px 10px;
             list-style-type: decimal;
+            min-height: 20px;
         }
 
         img {
@@ -34,6 +35,11 @@
         .not_downloaded {
             color: #808080;
         }
+
+        .loading {
+            background: no-repeat url('img/ajax-loader.gif') 50% 50%;
+        }
+
     </style>
 
     <!-- JavaScript and HTML must be in separate files for security. -->
@@ -42,6 +48,6 @@
 </head>
 <body>
 
-<ul id="track_list"></ul>
+<ul id="track_list" class="loading"></ul>
 </body>
 </html>

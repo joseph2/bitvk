@@ -15,10 +15,10 @@ var cmd_listener = function (request, sender, send_response) {
     }
 };
 
-//chrome.storage.local.get("tracks", function(fetchedData) {
-//    var number_tracks = fetchedData.tracks.length || 0;
-//    chrome.browserAction.setBadgeText({text: String(number_tracks + 1)});
-//});
+chrome.storage.local.get("tracks", function(fetchedData) {
+    var number_tracks = fetchedData.tracks.length || 0;
+    chrome.browserAction.setBadgeText({text: String(number_tracks)});
+});
 
 
 chrome.browserAction.setBadgeBackgroundColor({color: [0, 93, 255, 100]});

@@ -76,7 +76,8 @@ trackList = {
 
         var items = this.tracks;
         this.storage.set({'tracks': items});
-        this.receiver.sendMessage({cmd: "vokal_update_data", number: items.length});
+//        this.receiver.sendMessage({cmd: "vokal_update_data", number: items.length});
+        chrome.extension.sendMessage({cmd: "vokal_update_data", number: items.length});
         this.changed = false;
     },
 
@@ -106,7 +107,8 @@ trackList = {
 
         var exist_track = this.getByVkId(track.vk_id);
         if (exist_track) {
-            this._update(exist_track);
+            track.id = exist_track.id;
+            this._update(track);
             return;
         }
 
@@ -117,9 +119,20 @@ trackList = {
     },
 
     _update: function (new_track) {
+        var changed = false;
+        var track = this.tracks[new_track.id];
 
+        for (var property in new_track) {
+            var new_field = new_track[property]
+            if (new_field !== track[property]) {
+                track[property] = new_field;
+                changed = true;
+            }
+        }
+
+        //fixme
         this.changed = true;
-        console.log('update', new_track);
+        console.log('update', track);
     }
 };
 
