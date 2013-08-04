@@ -317,6 +317,20 @@ injector = {
      * @param track
      */
     injectToAudioNode: function (node, track) {
+
+        node.attr('vokal_id', track.id);
+        if (node.parent('.module_body').length) return;
+
+        if (track.bit_rate) {
+            $('.duration', node).after('<div class="fl_r vokal_bitrate">' + track.bit_rate + ' kb/s</div>');
+        }
+
+        if (track.downloaded) {
+            view.markDownloaded($('.area', node));
+        }
+
+        if (node.parent('#pad_playlist').length) return;
+
         var download_link = '<div class="audio_remove_wrap vokal_el fl_r" ' +
             'onmouseover="Audio.rowActive(this, \'Скачать аудиозапись\', [9, 5, 0]);" ' +
             'onmouseout="Audio.rowInactive(this);" ' +
@@ -326,15 +340,6 @@ injector = {
         $('.actions', node).prepend(download_link);
 
 
-        node.attr('vokal_id', track.id)
-
-        if (track.bit_rate) {
-            $('.duration', node).after('<div class="fl_r vokal_bitrate">' + track.bit_rate + ' kb/s</div>');
-        }
-
-        if (track.downloaded) {
-            view.markDownloaded($('.area', node));
-        }
     }
 };
 

@@ -14,6 +14,10 @@
 
 }
 
+.current .vokal_download_btn{
+    background: no-repeat url('data:image/gif;base64,R0lGODlhEAAQAKEDAPX3+dnj6tPe5v///yH5BAEKAAMALAAAAAAQABAAAAIznI+pJrLbnooyxEuPxaOJgGSic4wlyTjbB2adA2wB8IYk8NH1eQD6nnq4Vp4iCEE0SpYFADs=');
+}
+
 .over .vokal_download_btn {
     visibility: visible;
     overflow: hidden;
@@ -23,10 +27,18 @@
     background: no-repeat right 47% url('data:image/gif;base64,R0lGODlhBgAGAIABACtYev///yH5BAEKAAEALAAAAAAGAAYAAAIJRGIHee2e2GoFADs=');
     /*background: no-repeat right bottom url('data:image/gif;base64,R0lGODlhCgAKAIABANPe5v///yH5BAEKAAEALAAAAAAKAAoAAAITjH+ACLrRHIsrtkmTxVdnY0lGAQA7');*/
 }
+.current .vokal_downloaded {
+    background: no-repeat right 47% url('data:image/gif;base64,R0lGODlhBgAFAIABANPe5v///yH5BAEKAAEALAAAAAAGAAUAAAIIRGIHea2vWAEAOw==');
+}
 
 .over .vokal_bitrate {
 
     visibility: hidden;
+}
+
+#pad_playlist .over .vokal_bitrate {
+
+    visibility: visible;
 }
 
 .current .vokal_bitrate{
@@ -72,17 +84,20 @@
 }
 /* end */
 
+/* pad list*/
+/* end*/
+
 /* td.info  -- styles for friend updates*/
 td.info .vokal_bitrate {
     padding: 10px 5px 9px;
 }
 
-td.info .title_wrap {
+#main_panel td.info .title_wrap {
     width: 260px !important;
 }
 
 td.info .vokal_el {
-    margin: 3px 3px 3px 0 !important;
+    margin: 4px 4px 4px 0 !important;
     padding: 3px !important;
 }
 /* end */
