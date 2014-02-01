@@ -9,6 +9,26 @@ SETTINGS = {
     gather_detail: true
 };
 
+//SETTINGS
+var settingsT = function settingsT() {
+    this.bt = null;
+    this.dn = null;
+}
+
+chrome.storage.sync.get('vkmustool', function(items) {
+    if (items.vkmustool) {
+        settingsT.bt = items.vkmustool.bitrate;
+        settingsT.dn = items.vkmustool.download;
+                
+    }
+});
+// Значения по умолчанию
+if (settingsT.bt == null) {
+    settingsT.bt = true;}
+if (settingsT.dn == null) {
+    settingsT.dn = true;}
+
+
 var Track = function Track() {
     this._version = 1;
     this.id = null;
@@ -264,12 +284,14 @@ injector = {
         node.attr('vokal_id', track.id);
         if (node.parent('.module_body').length) return;
 
-        if (track.bit_rate) {
+        console.log('bitrate',settingsT.bt);
+        if ((track.bit_rate) && (settingsT.bt)) {
             $('.duration', node).after('<div class="fl_r vokal_bitrate">' + track.bit_rate + '</div>');
-        }
+        }        
 
         if (node.parent('#pad_playlist').length) return;
 
+        if (settingsT.dn) {
         var download_link = '<div class="audio_remove_wrap vokal_el fl_r" ' +
             'onmouseover="Audio.rowActive(this, \'Download\', [9, 5, 0]);" ' +
             'onmouseout="Audio.rowInactive(this);" ' +
@@ -277,7 +299,7 @@ injector = {
             '<div vokal_track_id="' + track.id + '" class="vokal_download_btn"></div></div>';
 
         $('.actions', node).prepend(download_link);
-
+        }
 
     }
 

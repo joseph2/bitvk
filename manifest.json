@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "VK Music Tool",
-    "version": "0.1",
+    "version": "0.2",
     "description": "Displays tracks bitrate and adds the ability to download them",
     "icons": {
         "128": "ico/128.png",
@@ -15,10 +15,6 @@
             "matches": [ "*://vk.com/*" ]
         }
     ],
-
-    "background": {
-        "scripts": ["vendor/zepto.js", "background.js"]
-    },
 
     "options_page": "options.html"
 }
