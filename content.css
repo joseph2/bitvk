@@ -10,10 +10,6 @@
     overflow: hidden;
 }
 
-.vokal_audio_download {
-
-}
-
 .current .vokal_download_btn{
     background: no-repeat url('data:image/gif;base64,R0lGODlhEAAQAKEDAPX3+dnj6tPe5v///yH5BAEKAAMALAAAAAAQABAAAAIznI+pJrLbnooyxEuPxaOJgGSic4wlyTjbB2adA2wB8IYk8NH1eQD6nnq4Vp4iCEE0SpYFADs=');
 }
@@ -23,19 +19,11 @@
     overflow: hidden;
 }
 
-.vokal_downloaded {
-    background: no-repeat right 47% url('data:image/gif;base64,R0lGODlhBgAGAIABACtYev///yH5BAEKAAEALAAAAAAGAAYAAAIJRGIHee2e2GoFADs=');
-    /*background: no-repeat right bottom url('data:image/gif;base64,R0lGODlhCgAKAIABANPe5v///yH5BAEKAAEALAAAAAAKAAoAAAITjH+ACLrRHIsrtkmTxVdnY0lGAQA7');*/
-}
-
-
 .over .vokal_bitrate {
-
     visibility: hidden;
 }
 
 #pad_playlist .over .vokal_bitrate {
-
     visibility: visible;
 }
 
@@ -47,8 +35,8 @@
     /*padding: 11px 0px 9px;*/
     padding: 2px 4px;
     margin: 9px 0 6px;
-    background-color: #DAE2E9;
-    color: #616E7E;
+    background-color: #EFF2F5;
+    color: #7C8EA5;
     font-size: 0.8em;
     visibility: visible;
     font-family: sans-serif;
@@ -58,22 +46,10 @@
     width: 290px !important;
 }
 
-/* player top panel*/
-.ac_name {
-    max-width: 300px  !important;
-}
-
-#ac .info {
-    width: 395px !important;
-}
-/* end */
-
-/* pad list*/
-/* end*/
-
 /* td.info  -- styles for friend updates*/
 td.info .vokal_bitrate {
-    padding: 10px 5px 9px;
+    padding: 2px 4px;
+    margin: 7px 5px 6px;
 }
 
 #main_panel td.info .title_wrap {

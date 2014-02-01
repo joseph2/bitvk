@@ -2,14 +2,17 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Vokal oprions</title>
-    <link href='vendor/bootstrap.css' rel='stylesheet' type='text/css'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BitVK Options</title>
+    <link href='vendor/bootstrap.min.css' rel='stylesheet' type='text/css'>
+    <link href='vendor/bootstrap-theme.min.css' rel='stylesheet' type='text/css'>
+    <link href="vendor/cover.css" rel="stylesheet">
     <script src="vendor/jquery.js"></script>
-    <script src="vendor/bootstrap.js"></script>
     <script src="options.js"></script>
 
-
     <style>
+    /*
         body {
             background-color: #5f6b78;
             color: #373e45;
@@ -77,60 +80,56 @@
             max-width: 600px !important;
             font-size: 14px;
         }
-
+    */
     </style>
 </head>
 <body>
-<a href="https://github.com/AlmazKo/vokal">
-    <img class="fork_me" src="img/forkme_right_red_aa0000.png" alt="Fork me on GitHub">
-</a>
-
-<div class="container">
-
-    <div class="main panel">
-        <h1>Vokal</h1>
-
-        <ul class="nav nav-tabs">
-            <li class="active"><a href="#description" data-toggle="tab">Описание</a></li>
-            <li><a href="#setting" data-toggle="tab">Настройки</a></li>
-            <li><a href="#stat" data-toggle="tab">Статистика</a></li>
-        </ul>
-
-        <div class="tab-content">
-            <div id="description" class="tab-pane fade active in">
-                <p>
-                    Vokal - это расширение для браузера, позволяющее скачивать треки из <i>vkontakte.ru</i>.
-                </p>
-
-                <p>
-                    Vokal является приложением с открытым исходным кодом и прозрачным функционалом
-                </p>
-                <br/>
-                <input id="bitrate" type="checkbox" name="bitrate" checked>Показывать битрейт<br/>
-                <input id="download" type="checkbox" name="download" checked>Разрешить скачивание треков<br/>
-                <br/>
-                <button id="action__save_settings" type="button" class="btn btn-default btn-small">Сохранить настройки</button>
+    <a href="https://github.com/joseph2/vkmustool">
+        <img class="fork_me" src="img/forkme_right_red_aa0000.png" alt="Fork me on GitHub">
+    </a>
+    <div class="site-wrapper">
+      <div class="site-wrapper-inner">
+        <div class="cover-container">
+          <div class="masthead clearfix">
+            <div class="inner">
+              <img id="logo" src="ico/128.png" />
+              <h3 class="masthead-brand">BitVK</h3>
+              <!--
+              <ul class="nav masthead-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">Features</a></li>
+                <li><a href="#">Contact</a></li>
+              </ul>
+              -->
             </div>
+          </div>
 
-            <div id="setting" class="tab-pane fade">
-                <dl class="dl-horizontal">
-                    <dt>Размер кэша</dt><dd><span id="vokal_cache_size">~</span> байт</dd>
-                </dl>
-                <button id="action__reset_cache" type="button" class="btn btn-default btn-small">Почистить кэш</button>
+          <div id="inncover" class="inner cover">
+            <p class="lead">Это расширение позволит вам скачать любые аудиозаписи из VK, а также узнать их битрейт.</p>
+            <div id="settings">
+            <div class="checkbox">
+                <label>
+                    <input id="bitrate" type="checkbox" name="bitrate" checked>Показывать битрейт
+                </label>
             </div>
-
-            <div id="stat" class="tab-pane fade">
-                <dl class="dl-horizontal">
-                    <dt>Всего в базе</dt><dd><span id="vokal_total_tracks">~</span> песен</dd>
-                    <dt>Скачено</dt><dd><span id="vokal_total_download_tracks">~</span> песен</dd>
-                </dl>
-                <table id="table_stat" class="table table-hover"></table>
+            <div class="checkbox">
+                <label>
+                    <input id="download" type="checkbox" name="download" checked>Разрешить скачивание
+                </label>
             </div>
+            </div>
+            <p class="lead">
+                <button id="action__save_settings" type="button" class="btn btn-lg btn-primary">Сохранить настройки</button>
+            </p>
+          </div>
 
+          <div class="mastfoot">
+            <div class="inner">
+              <p>Developed by <a href="https://github.com/joseph2">Anton Zolotov</a> | v.<i id="vokal_version"></i></p>
+            </div>
+          </div>
         </div>
-        <div class="panel-footer text-muted">Версия <i id="vokal_version"></i></div>
+      </div>
     </div>
-
-</div>
-</body>
+  </body>
 </html>

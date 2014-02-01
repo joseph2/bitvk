@@ -1,8 +1,8 @@
 {
     "manifest_version": 2,
-    "name": "VK Music Tool",
-    "version": "0.2",
-    "description": "Displays tracks bitrate and adds the ability to download them",
+    "name": "BitVK",
+    "version": "0.5",
+    "description": "Расширение позволит вам скачивать аудиозаписи из VK, а также узнать их битрейт.",
     "icons": {
         "128": "ico/128.png",
         "24": "ico/24.png"
@@ -15,6 +15,5 @@
             "matches": [ "*://vk.com/*" ]
         }
     ],
-
     "options_page": "options.html"
 }
