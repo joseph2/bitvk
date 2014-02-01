@@ -54,7 +54,7 @@ jQuery(function ($) {
 
     $('#action__reset_cache').on('click', function (e) {
         chrome.storage.local.clear();
-        chrome.browserAction.setBadgeText({text: String(0)});
+        //chrome.browserAction.setBadgeText({text: String(0)});
         chrome.storage.local.getBytesInUse('tracks', function (bytes) {
             $('#vokal_cache_size').text(bytes);
         });

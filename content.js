@@ -19,7 +19,6 @@ var Track = function Track() {
     this.duration = null;
     this.bit_rate = null;
     this.bytes = null;
-    this.downloaded = false;
     this.file = null;
 }
 
@@ -65,20 +64,9 @@ trackList = {
         a.download = track.file;
         a.click();
 
-        track.downloaded = true;
         this.add(track);
 
 //            this.receiver.sendMessage({cmd: "vokal_download_audio", track: track});
-    },
-
-    save: function () {
-        if (!this.changed) return;
-
-        var items = this.tracks;
-        this.storage.set({'tracks': items});
-//        this.receiver.sendMessage({cmd: "vokal_update_data", number: items.length});
-        chrome.extension.sendMessage({cmd: "vokal_update_data", number: items.length});
-        this.changed = false;
     },
 
     /**
@@ -137,14 +125,6 @@ trackList = {
 };
 
 window.view = {
-    markDownloaded: function (btn) {
-        var el = $(btn)
-        while (!el.hasClass('area')) {
-            el = el.parent();
-        }
-
-        el.addClass('vokal_downloaded');
-    },
 
     onDownloadClick      : function (target) {
 
@@ -152,27 +132,11 @@ window.view = {
         if (track_id === undefined) return;
         var track = trackList.get(parseInt(track_id));
 
-        if (track && !track.downloaded) {
+        if (track) {
             trackList.download(track);
-            this.markDownloaded(target);
         }
     },
 
-//{"0":"XXXXXXX","1":"217260901","2":"https://psv4.vk.me/c1062/u939351/audios/35e614163a0f.mp3","3":"201","4":"3:21","5":"Trobar De Morte","6":"The Harp of Dagda","7":"23180514","8":"0","9":"0","10":"","11":"0","12":"1","_order":1,"_prev":"XXXXXXX_218332870","_next":"XXXXXXX_214922351","aid":"XXXXXXX_217260901"}
-    onPlayerDownloadClick: function (vk_data) {
-        var track = new Track();
-        track.vk_id = vk_data.aid;
-        track.url = vk_data["2"];
-        track.artist = vk_data["5"];
-        track.title = vk_data["6"];
-        track.duration = vk_data["4"];
-
-
-        trackList.add(track);
-        trackList.download(track);
-
-        return track;
-    }
 }
 
 window.parser = {
@@ -277,9 +241,6 @@ injector = {
             parser.parseAudioList()
         }, 1000);
 
-        setInterval(function () {
-            trackList.save();
-        }, 2000);
     },
 
     clientClickListener: function () {
@@ -289,24 +250,6 @@ injector = {
              */
             if (event.target.className == 'vokal_download_btn') {
                 view.onDownloadClick(event.target)
-            }
-
-            // click by download button's from top player
-            if (event.target.className == 'vokal_ac_download_btn') {
-                view.onPlayerDownloadClick(JSON.parse((event.target.getAttribute('current_track'))))
-            }
-
-
-            //inject to top player
-            if (event.target.id == 'ac_play' && !$('#vokal_ac_btn').length) {
-                setTimeout(function () {
-                    var download_link = '<div id="vokal_ac_btn" class="vokal_el ctrl_wrap clear_fix fl_l" ' +
-                        'onmouseover="Audio.rowActive(this, \'Скачать аудиозапись\', [9, 5, 0]);" ' +
-                        'onclick="return cancelEvent(event);">' +
-                        '<div class="vokal_ac_download_btn" current_track="" ' +
-                        'onmouseover="this.setAttribute(\'current_track\', JSON.stringify(window.audioPlayer.lastSong));" ></div></div>';
-                    $('#ac_status').after(download_link);
-                }, 200);
             }
         }, true);
     },
@@ -322,17 +265,13 @@ injector = {
         if (node.parent('.module_body').length) return;
 
         if (track.bit_rate) {
-            $('.duration', node).after('<div class="fl_r vokal_bitrate">' + track.bit_rate + ' kb/s</div>');
-        }
-
-        if (track.downloaded) {
-            view.markDownloaded($('.area', node));
+            $('.duration', node).after('<div class="fl_r vokal_bitrate">' + track.bit_rate + '</div>');
         }
 
         if (node.parent('#pad_playlist').length) return;
 
         var download_link = '<div class="audio_remove_wrap vokal_el fl_r" ' +
-            'onmouseover="Audio.rowActive(this, \'Скачать аудиозапись\', [9, 5, 0]);" ' +
+            'onmouseover="Audio.rowActive(this, \'Download\', [9, 5, 0]);" ' +
             'onmouseout="Audio.rowInactive(this);" ' +
             'onclick="return cancelEvent(event);">' +
             '<div vokal_track_id="' + track.id + '" class="vokal_download_btn"></div></div>';
@@ -341,6 +280,7 @@ injector = {
 
 
     }
+
 };
 
 Zepto(function ($) {

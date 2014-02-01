@@ -1,9 +1,11 @@
+/*
 function download_complete() {
     chrome.browserAction.getBadgeText({}, function (currentText) {
         var number = parseInt(currentText)
         chrome.browserAction.setBadgeText({text: String(number + 1)});
     });
 }
+*/
 
 var cmd_listener = function (request, sender, send_response) {
     if (request.cmd == "vokal_download_audio") {
@@ -21,7 +23,7 @@ chrome.storage.local.get("tracks", function(fetchedData) {
 });
 
 
-chrome.browserAction.setBadgeBackgroundColor({color: [0, 93, 255, 100]});
-chrome.browserAction.setBadgeText({text: String(0)});
-chrome.browserAction.setPopup({popup: "popup.html"})
+//chrome.browserAction.setBadgeBackgroundColor({color: [0, 93, 255, 100]});
+//chrome.browserAction.setBadgeText({text: String(0)});
+//chrome.browserAction.setPopup({popup: "popup.html"})
 chrome.extension.onMessage.addListener(cmd_listener)
