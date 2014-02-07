@@ -10,14 +10,6 @@
     <link href="vendor/cover.css" rel="stylesheet">
     <script src="vendor/jquery.js"></script>
     <script src="options.js"></script>
-
-    <style>
-        .tooltip-inner
-        {
-            max-width: 600px !important;
-            font-size: 14px;
-        }
-    </style>
 </head>
 <body>
     <a href="https://github.com/joseph2/bitvk">
@@ -41,27 +33,29 @@
           </div>
 
           <div id="inncover" class="inner cover">
-            <p class="lead">Это расширение позволит вам скачать любые аудиозаписи из VK, а также узнать их битрейт.</p>
+            <p id="about" class="lead"></p>
             <div id="settings">
             <div class="checkbox">
-                <label>
-                    <input id="bitrate" type="checkbox" name="bitrate" checked>Показывать битрейт
+                <label id="sbitrate">
+                    <input id="bitrate" type="checkbox" name="bitrate" checked>
                 </label>
             </div>
             <div class="checkbox">
-                <label>
-                    <input id="download" type="checkbox" name="download" checked>Разрешить скачивание
+                <label id="sdownload">
+                    <input id="download" type="checkbox" name="download" checked>
                 </label>
             </div>
+            <br/>
             </div>
             <p class="lead">
-                <button id="action__save_settings" type="button" class="btn btn-lg btn-primary">Сохранить настройки</button>
+                <button id="action__save_settings" type="button" class="btn btn-lg btn-primary"></button>
             </p>
           </div>
 
           <div class="mastfoot">
-            <div class="inner">
-              <p>Developed by <a href="https://github.com/joseph2">Anton Zolotov</a> | v.<i id="vokal_version"></i></p>
+            <div class="inner">              
+              <p id="develop"><a href="https://github.com/joseph2">Anton Zolotov</a> | v.<i id="vokal_version"></i></p>
+              <p class="uslang" id="uselang"></p>
             </div>
           </div>
         </div>

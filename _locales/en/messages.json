@@ -1,0 +1,12 @@
+{
+  "chrome_extension_description": {"message": "Extension will allow you to download audio recordings from VK, as well as learn their bitrate."},
+  "download": {"message": "Download"},
+  "settingstitle": {"message": "Settings"},
+  "about": {"message": "This extension will allow you to download any audio record from VK, as well as learn their bitrate."},
+  "showbitrate": {"message": "Show bitrate"},
+  "showdownload": {"message": "Allow download"},
+  "showlanguag": {"message": "This extension using language from your browser's locale. To change locale, go to Settings -> Language and input settings"},
+  "savesettings": {"message": "Save settings"},
+  "savemsg": {"message": "Settings saved succesfully!"},
+  "author": {"message": "Developed by "}
+}

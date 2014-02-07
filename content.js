@@ -29,9 +29,8 @@ if (settingsT.bt == null) {
     settingsT.bt = true;}
 if (settingsT.dn == null) {
     settingsT.dn = true;}
-/*if (settingsT.ln == null) {
-    settingsT.ln = document.documentElement.lang;
-    chrome.storage.sync.set({'vkmustool':settingsT});}*/
+//if (settingsT.ln == null) {
+    //settingsT.ln = "ru";}
 
 
 var Track = function Track() {
@@ -298,7 +297,7 @@ injector = {
 
         if (settingsT.dn) {
         var download_link = '<div class="audio_remove_wrap vokal_el fl_r" ' +
-            'onmouseover="Audio.rowActive(this, \'Скачать\', [9, 5, 0]);" ' +
+            'onmouseover="Audio.rowActive(this, \' Скачать \', [9, 5, 0]);" ' +
             'onmouseout="Audio.rowInactive(this);" ' +
             'onclick="return cancelEvent(event);">' +
             '<div vokal_track_id="' + track.id + '" class="vokal_download_btn"></div></div>';
