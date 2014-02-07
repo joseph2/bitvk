@@ -1,13 +1,13 @@
 {
     "manifest_version": 2,
     "name": "BitVK",
-    "version": "0.5",
+    "version": "0.7",
     "description": "Расширение позволит вам скачивать аудиозаписи из VK, а также узнать их битрейт.",
     "icons": {
         "128": "ico/128.png",
         "24": "ico/24.png"
     },
-    "permissions": ["*://*.vk.me/*", "*://vk.com/*", "background", "storage"],
+    "permissions": ["*://*.vk.me/*", "*://vk.com/*", "storage"],
     "content_scripts": [
         {
             "js": [ "vendor/zepto.js", "content.js" ],

@@ -13,12 +13,14 @@ SETTINGS = {
 var settingsT = function settingsT() {
     this.bt = null;
     this.dn = null;
+    //this.ln = null;
 }
 
 chrome.storage.sync.get('vkmustool', function(items) {
     if (items.vkmustool) {
         settingsT.bt = items.vkmustool.bitrate;
         settingsT.dn = items.vkmustool.download;
+        //settingsT.ln = items.vkmustool.languag;
                 
     }
 });
@@ -27,6 +29,9 @@ if (settingsT.bt == null) {
     settingsT.bt = true;}
 if (settingsT.dn == null) {
     settingsT.dn = true;}
+/*if (settingsT.ln == null) {
+    settingsT.ln = document.documentElement.lang;
+    chrome.storage.sync.set({'vkmustool':settingsT});}*/
 
 
 var Track = function Track() {
