@@ -35,8 +35,9 @@ jQuery(function ($) {
         settingsF.bitrate = $("#bitrate").prop("checked");
         settingsF.download = $("#download").prop("checked");
         chrome.storage.sync.set({'vkmustool':settingsF}, function(success) {
-            $('#action__save_settings').toggleClass('btn-success');
-            $('#inncover').append('Настройки сохранены');
+            $('#action__save_settings').toggleClass("btn-success");
+            $("#succmsg").remove();
+            $('#inncover').append('<span id="succmsg">Настройки сохранены!</span>');
         });
     });    
 
