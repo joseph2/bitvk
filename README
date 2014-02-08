@@ -1,5 +1,23 @@
-### BitVK - это расширение для Google Chrome, которое позволит вам:
-* Cкачать любые аудиозаписи c vk.com
-* Посмотреть их битрейт
+BitVK is Google Chrome extension for vk.com
 
-Эти опции можно выбрать на странице настроек. Без рекламы и смс.
+BitVK lets you know about the quality of music you listen to, next to each entry shows its bitrate.
+It is also possible to download records fast and convenient way.
+Both functions can be configured
+
+Functions:
+- To each record shows its bitrate
+- Possible to download records
+- Supports two languages: English and Russian (based on Google Chrome settings)
+
+-----
+
+BitVK это расширение Google Chrome для сайта vk.com
+
+BitVK даёт вам возможность знать насколько качественную музыку вы слушаете, для этого напротив каждой аудиозаписи указывается её битрейт.
+Также есть возможность скачивать аудиозаписи быстрым и удобным способом.
+Обе функции можно настроить.
+
+Функции:
+- Для каждой аудиозаписи показывается её битрейт
+- Возможность скачивания аудиозаписей
+- Поддержка двух языков: Русский и Английский (в зависимости от настроек Google Chrome)

@@ -106,6 +106,7 @@ body {
 
 .cover {
   padding: 0 20px;
+  text-align: left;
 }
 .cover .btn-lg {
   padding: 10px 20px;
@@ -122,15 +123,13 @@ body {
 }
 .mastfoot .inner p {
     font-size: 0.8em;
+    line-height: 0.5em;
 }
 .mastfoot .inner p a {
     color: #555;
 }
 .inner img {
   float: left;width: 44px;margin-right: 10px;
-}
-#settings {
-  width: 174px;text-align: left;margin: 70px auto 20px;
 }
 .fork_me {
             position: absolute;
@@ -150,6 +149,9 @@ body {
         .uslang {
           font-size:0.7em !important;
         }
+        .lead {
+font-size: 20px;
+}
 
 /*
  * Affix and center

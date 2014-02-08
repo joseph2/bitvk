@@ -2,7 +2,7 @@ function throw_event(name, data) {
     var event = document.createEvent("Event");
     event.initEvent(name, true, true);
     document.dispatchEvent(event);
-    console.log('Dispatch event: ' + name);
+    //console.log('Dispatch event: ' + name);
 }
 
 SETTINGS = {
@@ -69,9 +69,9 @@ trackList = {
                 if (Object.getOwnPropertyNames(fetched_data).length > 0) {
                     track_list.tracks = fetched_data.tracks;
                     track_list.index = track_list.tracks.length;
-                    console.log('load tracks:' + track_list.tracks.length);
+                    //console.log('load tracks:' + track_list.tracks.length);
                 } else {
-                    console.log('Not saved tracks');
+                    //console.log('Not saved tracks');
                 }
 
                 throw_event('load_data');
@@ -127,7 +127,7 @@ trackList = {
         track.id = this.index++;
         this.tracks[track.id] = track;
         this.changed = true;
-        console.log('add', track);
+        //console.log('add', track);
     },
 
     _update: function (new_track) {
@@ -144,7 +144,7 @@ trackList = {
 
         //fixme
         this.changed = true;
-        console.log('update', track);
+        //console.log('update', track);
     }
 };
 
@@ -211,7 +211,7 @@ window.parser = {
                 callback(track);
             },
             error  : function (xhr, type) {
-                console.log(track, xhr);
+                //console.log(track, xhr);
             }
         })
     },
@@ -288,7 +288,7 @@ injector = {
         node.attr('vokal_id', track.id);
         if (node.parent('.module_body').length) return;
 
-        console.log('bitrate',settingsT.bt);
+        //console.log('bitrate',settingsT.bt);
         if ((track.bit_rate) && (settingsT.bt)) {
             $('.duration', node).after('<div class="fl_r vokal_bitrate">' + track.bit_rate + '</div>');
         }        
@@ -297,7 +297,7 @@ injector = {
 
         if (settingsT.dn) {
         var download_link = '<div class="audio_remove_wrap vokal_el fl_r" ' +
-            'onmouseover="Audio.rowActive(this, \' Скачать \', [9, 5, 0]);" ' +
+            'onmouseover="Audio.rowActive(this, \' '+ chrome.i18n.getMessage("download") +' \', [9, 5, 0]);" ' +
             'onmouseout="Audio.rowInactive(this);" ' +
             'onclick="return cancelEvent(event);">' +
             '<div vokal_track_id="' + track.id + '" class="vokal_download_btn"></div></div>';

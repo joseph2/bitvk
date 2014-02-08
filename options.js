@@ -1,4 +1,7 @@
 jQuery(function ($) {
+    
+    console.log(chrome.app);
+
     // Localization
     $('title').text('BitVK - '+chrome.i18n.getMessage("settingstitle"));
     $('#about').text(chrome.i18n.getMessage("about"));
@@ -8,56 +11,52 @@ jQuery(function ($) {
     $('#action__save_settings').text(chrome.i18n.getMessage("savesettings"));
     $('#develop').prepend(chrome.i18n.getMessage("author"));
 
-    console.log(chrome.app);
+    // Version from manifest
     $('#vokal_version').text(chrome.app.getDetails().version);
 
-    //ЧТЕНИЕ НАСТРОЕК
+
+    // Чтение настроек из хранилища
     var settingsT = function settingsT() {
         this.bt = null;
         this.dn = null;
     }
+
     chrome.storage.sync.get('vkmustool', function(items) {
         if (items.vkmustool) {
             settingsT.bt = items.vkmustool.bitrate;
             settingsT.dn = items.vkmustool.download;
-            settingsT.ln = items.vkmustool.languag;
 
-            // Значения по умолчанию
+            // Значения по умолчанию, если хранилище пусто
             if (settingsT.bt == null) {
                 settingsT.bt = true;}
             if (settingsT.dn == null) {
                 settingsT.dn = true;}
-            if (settingsT.ln == null) {
-                settingsT.ln = "ru";}
             
-            // Восстановить сохраненные значения.
+            // Восстановить сохраненные значения из хранилища
             if (settingsT.bt == false) {
                 $("input[name=bitrate]").removeAttr("checked");}
             if (settingsT.dn == false) {
-                $("input[name=download]").removeAttr("checked");}    
-            if (settingsT.ln == "ru") {
-                $("#languag [value='ru']").attr("selected", "selected");} 
-            if (settingsT.ln == "en") {
-                $("#languag [value='en']").attr("selected", "selected");}      
+                $("input[name=download]").removeAttr("checked");}        
         }
     });
+    // End
 
-    //СОХРАНЕНИЕ НАСТРОЕК
+
+    // Сохранение настроек в хранилище
     $('#action__save_settings').on('click', function (e) {
         var settingsF = function settingsF() {
             this.bitrate = null;
             this.download = null;
-            this.languag = null;
         }
         settingsF.bitrate = $("#bitrate").prop("checked");
         settingsF.download = $("#download").prop("checked");
-        settingsF.languag = $("#languag option:selected").val();
         chrome.storage.sync.set({'vkmustool':settingsF}, function(success) {
             $('#action__save_settings').toggleClass("btn-success");
             $("#succmsg").remove();
             $('#inncover').append('<span id="succmsg"></span>');
             $('#succmsg').text(chrome.i18n.getMessage('savemsg'));
         });
-    });    
+    });
+    // End    
 
 })
