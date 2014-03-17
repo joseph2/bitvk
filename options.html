@@ -6,57 +6,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title></title>
     <link href='vendor/bootstrap.min.css' rel='stylesheet' type='text/css'>
-    <link href="vendor/cover.css" rel="stylesheet">
+    <link href='vendor/bootstrap-switch.min.css' rel='stylesheet' type='text/css'>
+    <link href="vendor/main.css" rel="stylesheet">
     <script src="vendor/jquery.js"></script>
+    <script src="vendor/bootstrap-switch.min.js"></script>
     <script src="options.js"></script>
 </head>
 <body>
-    <a href="https://github.com/joseph2/bitvk">
-        <img class="fork_me" src="img/forkme_right_red_aa0000.png" alt="Fork me on GitHub">
-    </a>
-
-    <div class="site-wrapper">
-      <div class="site-wrapper-inner">
-        <div class="cover-container">
-
-          <div class="masthead clearfix">
-            <div class="inner">
-              <img id="logo" src="ico/128.png" />
-              <h3 class="masthead-brand">BitVK</h3>
-            </div>
-          </div>
-
-          <div id="inncover" class="inner cover">
-            <p id="about" class="lead"></p>
-            <br/>
-
-            <div id="settings">
-            <div class="checkbox">
-                <label id="sbitrate">
-                    <input id="bitrate" type="checkbox" name="bitrate" checked>
-                </label>
-            </div>
-            <div class="checkbox">
-                <label id="sdownload">
-                    <input id="download" type="checkbox" name="download" checked>
-                </label>
-            </div>
-            </div>
-
-            <p class="lead">
-                <button id="action__save_settings" type="button" class="btn btn-lg btn-primary"></button>
-            </p>
-          </div>
-
-          <div class="mastfoot">
-            <div class="inner">              
-              <p id="develop"><a href="https://github.com/joseph2">Anton Zolotov</a> | v.<i id="vokal_version"></i></p>
-              <p class="uslang" id="uselang"></p>
-            </div>
-          </div>
-
-        </div>
+  <div id="head" class="container-fluid main-body">
+    <div class="container header">
+      <div class="feature center-vertically">
+        <img src="ico/128.png"/><span>BitVK</span>
+      </div>
+      <div class="feature center-vertically">
+        <p id="sslogan"></p>
       </div>
     </div>
-  </body>
+
+    <div id="inncover" class="marketing">
+      <p id="about" class="lead"></p>
+      <br/>
+      <div id="settings" class="row">
+        <div class="col-lg-6">
+          <img class="img-circle" src="img/feat2.png" alt="Generic placeholder image">
+          <h2 id="hbitrate"></h2>
+          <p id="descbitrate"></p>
+          <div id="bitcheck" class="checkbox">
+              <input id="bitrate" type="checkbox" name="bitrate" data-off-color="danger" checked>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <img class="img-circle" src="img/feat1.png" alt="Generic placeholder image">
+          <h2 id="hdownload"></h2>
+          <p id="descdownload"></p>
+          <div id="downcheck" class="checkbox">
+              <input id="download" type="checkbox" name="download" data-off-color="danger" checked>
+          </div>
+        </div>
+      </div><!-- /.row -->
+      <br/>
+      <br/>
+      <p class="lead">
+        <button id="action__save_settings" type="button" class="btn btn-lg btn-info"></button>
+      </p>
+      <span id="succmsg"></span>
+    </div>
+    
+  </div>
+  <footer>
+      <div class="inner">
+        <div class="links">
+          <a id="fullv" href="http://bitvk.com/"></a> | 
+          <a href="https://github.com/joseph2/bitvk">GitHub</a> | 
+          <span id="develop">Anton Zolotov</span> | 
+          <span>v.<span id="vokal_version"></span></span>
+        </div>              
+        <p class="uslang" id="uselang"></p>
+      </div>
+    </footer>
+</body>
 </html>

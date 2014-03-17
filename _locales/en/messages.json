@@ -8,5 +8,12 @@
   "showlanguag": {"message": "This extension using language from your browser's locale. To change locale, go to Settings -> Language and input settings"},
   "savesettings": {"message": "Save settings"},
   "savemsg": {"message": "Settings saved succesfully!"},
-  "author": {"message": "Developed by "}
+  "author": {"message": "Developed by "},
+  "slogan": {"message": "Listen to music made easy!"},
+  "hdownload": {"message": "Downloading"},
+  "hbitrate": {"message": "Bitrate"},
+  "fullv": {"message": "Official site"},
+  "alertv": {"message": "<strong>Attention!</strong> Released a new version of the BitVK. <a target='_blank' href='http://bitvk.com' class='alert-link'>Download the new version</a> from the official site."},
+  "descdownload": {"message": "BitVK allows you to download any audio recording. When the mouse hovers over the song, you'll see a small button for the download."},
+  "descbitrate": {"message": "For each audio is computed its bitrate. Is displayed in a convenient format and beautiful sleek design VK."}
 }

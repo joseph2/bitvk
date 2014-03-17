@@ -1,26 +1,45 @@
 jQuery(function ($) {
-    
     console.log(chrome.app);
+
+    // Проверяем доступность новой версии
+    $.getJSON( "http://bitvk.com/update/version.json", function( data ) {
+      if (data != (chrome.app.getDetails().version)) {
+        // Если новая версия найдена выдаём сообщение
+        $('#head').prepend('<div id="alertv" class="alert alert-warning"></div>');
+        $('#alertv').append(chrome.i18n.getMessage('alertv'));
+      }
+    });
+
+    // Инициализируем чекбоксы
+    $("[name='bitrate']").bootstrapSwitch();
+    $("[name='bitrate']").bootstrapSwitch('onText', 'I');
+    $("[name='bitrate']").bootstrapSwitch('offText', 'O');
+    $("[name='download']").bootstrapSwitch();
+    $("[name='download']").bootstrapSwitch('onText', 'I');
+    $("[name='download']").bootstrapSwitch('offText', 'O');
 
     // Localization
     $('title').text('BitVK - '+chrome.i18n.getMessage("settingstitle"));
+    $('#sslogan').text(chrome.i18n.getMessage('slogan'));
     $('#about').text(chrome.i18n.getMessage("about"));
-    $('#sbitrate').append(chrome.i18n.getMessage("showbitrate"));
-    $('#sdownload').append(chrome.i18n.getMessage("showdownload"));
+    $('#hdownload').text(chrome.i18n.getMessage("hdownload"));
+    $('#hbitrate').text(chrome.i18n.getMessage("hbitrate"));
+    $('#descdownload').text(chrome.i18n.getMessage("descdownload"));
+    $('#descbitrate').text(chrome.i18n.getMessage("descbitrate"));
     $('#uselang').text(chrome.i18n.getMessage("showlanguag"));
+    $('#fullv').text(chrome.i18n.getMessage("fullv"));
     $('#action__save_settings').text(chrome.i18n.getMessage("savesettings"));
     $('#develop').prepend(chrome.i18n.getMessage("author"));
+    $('#succmsg').text(chrome.i18n.getMessage('savemsg'));
 
     // Version from manifest
     $('#vokal_version').text(chrome.app.getDetails().version);
-
 
     // Чтение настроек из хранилища
     var settingsT = function settingsT() {
         this.bt = null;
         this.dn = null;
     }
-
     chrome.storage.sync.get('vkmustool', function(items) {
         if (items.vkmustool) {
             settingsT.bt = items.vkmustool.bitrate;
@@ -34,12 +53,11 @@ jQuery(function ($) {
             
             // Восстановить сохраненные значения из хранилища
             if (settingsT.bt == false) {
-                $("input[name=bitrate]").removeAttr("checked");}
+                $("#bitcheck").children(".bootstrap-switch").toggleClass("bootstrap-switch-on bootstrap-switch-off");}
             if (settingsT.dn == false) {
-                $("input[name=download]").removeAttr("checked");}        
+                $("#downcheck").children(".bootstrap-switch").toggleClass("bootstrap-switch-on bootstrap-switch-off");}         
         }
     });
-    // End
 
 
     // Сохранение настроек в хранилище
@@ -51,10 +69,12 @@ jQuery(function ($) {
         settingsF.bitrate = $("#bitrate").prop("checked");
         settingsF.download = $("#download").prop("checked");
         chrome.storage.sync.set({'vkmustool':settingsF}, function(success) {
-            $('#action__save_settings').toggleClass("btn-success");
-            $("#succmsg").remove();
-            $('#inncover').append('<span id="succmsg"></span>');
-            $('#succmsg').text(chrome.i18n.getMessage('savemsg'));
+            $('#action__save_settings').toggleClass("btn-info btn-success");
+            $("#succmsg").show("fast");
+            setTimeout (function(){
+                $("#succmsg").fadeOut("slow");
+                $('#action__save_settings').toggleClass("btn-success btn-info");
+            }, 5000);
         });
     });
     // End    
